@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "simple-emailer"
+version = "0.1.0"
+description = "A small script that allows you to connect to the GMail SMTP server and send emails."
+authors = ["Олег <shuwiku@gmail.com>"]
+license = "Unlicense"
+readme = "README.md"
+repository = "https://github.com/Shuwiku/simple_emailer.git"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
