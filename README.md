@@ -23,7 +23,7 @@ send_email(
 close_connection()
 ```
 
-For more details, see the `example.py` file.
+For more details, see the `example` files.
 
 ---
 
@@ -65,6 +65,31 @@ For more details, see the `example.py` file.
     ```
 
      Sends a message.
+
+    - `email_text: str` - the text of the email;
+
+    - `recipient_email: str` - the email address of the recipient;
+
+    - `sender_email: str` - the email address from which messages will be sent;
+
+    - `sender_password: str` - application password. Note that this is **NOT** your Google account password, but specifically an application password. For more details, see the "App passwords" section in the "Security" section of your Google account.
+
+    - `subject: str` - the subject of the email;
+
+    - `email_type: str` - the formatting type of the email text (e.g., "plain" or "html"). Default is "html".
+
+- ```python
+    send_email_quick.send_email_quick(
+        email_text: str,
+        recipient_email: str,
+        sender_email: str,
+        sender_password: str,
+        subject: str,
+        email_type: str = "html"
+    ) -> None: ...
+    ```
+
+    Establishes a connection, sends the email, and closes the connection. It is a combination of the functions `create_connection`, `close_connection`, and `send_email`.
 
     - `email_text: str` - the text of the email;
 
