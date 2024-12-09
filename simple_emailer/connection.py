@@ -2,7 +2,7 @@
 """Functions for managing the connection to the GMail SMTP server."""
 
 import sys
-from smtplib import SMTP
+from smtplib import SMTP, SMTPAuthenticationError
 
 
 __connection: SMTP
@@ -53,7 +53,12 @@ def create_connection(
         port=587
     )
     __connection.starttls()
-    __connection.login(
-        user=sender_email,
-        password=sender_password
-    )
+    try:
+        __connection.login(
+            user=sender_email,
+            password=sender_password
+        )
+    except SMTPAuthenticationError:
+        print("The email address and password were not "
+              "accepted by the Gmail server.")
+        sys.exit()
