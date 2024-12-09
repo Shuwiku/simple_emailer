@@ -9,4 +9,5 @@ from .connection import (  # noqa: F401
     create_connection
 )
 from .send_email import send_email  # noqa: F401
+from .send_email_quick import send_email_quick  # noqa: F401
 from .simple_emailer_error import SimpleEmailerError  # noqa: F401
