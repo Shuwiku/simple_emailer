@@ -4,8 +4,6 @@
 from smtplib import SMTP
 from email.mime.text import MIMEText
 
-from loguru import logger
-
 from .connection import _get_connection
 
 
@@ -40,5 +38,3 @@ def send_email(
         to_addrs=recipient_email,
         msg=email_message.as_string()
     )
-
-    logger.debug("Email sent successfully.")  # Logging
