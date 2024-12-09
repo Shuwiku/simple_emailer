@@ -9,6 +9,7 @@ repository = "https://github.com/Shuwiku/simple_emailer.git"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+loguru = "^0.7.3"
 
 [build-system]
 requires = ["poetry-core"]

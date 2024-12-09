@@ -3,6 +3,8 @@
 
 from smtplib import SMTP, SMTPAuthenticationError
 
+from loguru import logger
+
 from .simple_emailer_error import SimpleEmailerError
 
 
@@ -19,10 +21,10 @@ def _get_connection(
     try:
         return __connection
     except NameError:
-        raise SimpleEmailerError(
-            message="It seems you tried to send a message "
-                    "without creating a connection."
-        )
+        error_text: str = "It seems you tried to send a message " \
+                          "without creating a connection."
+        logger.error(error_text)  # Logging
+        raise SimpleEmailerError(message=error_text)
 
 
 def close_connection(
@@ -33,11 +35,12 @@ def close_connection(
     try:
         __connection.quit()
         del __connection
+        logger.debug("Connection to the server is closed.")  # Logging
     except NameError:
-        raise SimpleEmailerError(
-            message="It seems you tried to close a connection "
-                    "without creating it."
-        )
+        error_text: str = "It seems you tried to close a connection " \
+                          "without creating it."
+        logger.error(error_text)  # Logging
+        raise SimpleEmailerError(message=error_text)
 
 
 def create_connection(
@@ -57,13 +60,16 @@ def create_connection(
         port=587
     )
     __connection.starttls()
+    logger.debug("Connected to the GMail server.")  # Logging
     try:
         __connection.login(
             user=sender_email,
             password=sender_password
         )
+        # Logging
+        logger.debug("Successfully authenticated on the GMail server.")
     except SMTPAuthenticationError:
-        raise SimpleEmailerError(
-            message="The email address and password were not "
-                    "accepted by the Gmail server."
-        )
+        error_text: str = "The email address and password were not " \
+                          "accepted by the Gmail server."
+        logger.error(error_text)  # Logging
+        raise SimpleEmailerError(message=error_text)
