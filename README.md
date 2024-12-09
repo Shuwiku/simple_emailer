@@ -33,13 +33,13 @@ For more details, see the `example.py` file.
     connection._get_connection() -> smtplib.SMTP: ...
     ```
 
-    Returns an SMTP connection to the GMail server. Not used directly by the user, only from `sendemail.sendemail`. If the connection has not been established, it will cause the program to exit.
+    Returns an SMTP connection to the GMail server. Not used directly by the user, only from `sendemail.sendemail`. If the connection has not been established, it will raise `SimpleEmailerError` exception.
 
 - ```python
     connection.close_connection() -> None: ...
     ```
 
-    Closes the SMTP connection to the GMail server. Use at the very end of the program to avoid creating a new connection each time. If the connection has not been established, it will cause the program to exit.
+    Closes the SMTP connection to the GMail server. Use at the very end of the program to avoid creating a new connection each time. If the connection has not been established, it will raise `SimpleEmailerError` exception.
 
 - ```python
     connection.create_connection(  
@@ -75,6 +75,12 @@ For more details, see the `example.py` file.
     - `subject: str` - the subject of the email;
 
     - `email_type: str` - the formatting type of the email text (e.g., "plain" or "html"). Default is "html".
+
+- ```python
+    simple_emailer_error.SimpleEmailerError()
+    ```
+
+    The exception that is raised for any error during the script's execution.
 
 ---
 

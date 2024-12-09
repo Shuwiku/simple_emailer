@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """Functions for managing the connection to the GMail SMTP server."""
 
-import sys
 from smtplib import SMTP, SMTPAuthenticationError
+
+from .simple_emailer_error import SimpleEmailerError
 
 
 __connection: SMTP
@@ -18,9 +19,10 @@ def _get_connection(
     try:
         return __connection
     except NameError:
-        print("It seems you tried to send a message "
-              "without creating a connection.")
-        sys.exit()
+        raise SimpleEmailerError(
+            message="It seems you tried to send a message "
+                    "without creating a connection."
+        )
 
 
 def close_connection(
@@ -32,8 +34,10 @@ def close_connection(
         __connection.quit()
         del __connection
     except NameError:
-        print("It seems you tried to close a connection without creating it.")
-        sys.exit()
+        raise SimpleEmailerError(
+            message="It seems you tried to close a connection "
+                    "without creating it."
+        )
 
 
 def create_connection(
@@ -59,6 +63,7 @@ def create_connection(
             password=sender_password
         )
     except SMTPAuthenticationError:
-        print("The email address and password were not "
-              "accepted by the Gmail server.")
-        sys.exit()
+        raise SimpleEmailerError(
+            message="The email address and password were not "
+                    "accepted by the Gmail server."
+        )
