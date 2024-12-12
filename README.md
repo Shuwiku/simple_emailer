@@ -23,7 +23,7 @@ send_email(
 close_connection()
 ```
 
-For more details, see the `example` files.
+For more details, see the [example files](https://github.com/Shuwiku/Shuwiku/tree/main/simple_emailer).
 
 ---
 
